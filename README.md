@@ -29,9 +29,7 @@ Hệ thống phát hiện đèn giao thông sử dụng YOLOv8 và Deep Learning
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/traffic-light-detection.git
-cd traffic-light-detection
-
+git clone https://github.com/Lollipop203/TrafficLights
 # Tạo virtual environment
 python -m venv venv
 source venv/bin/activate  # Linux/Mac

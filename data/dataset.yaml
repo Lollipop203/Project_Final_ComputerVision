@@ -1,0 +1,20 @@
+# YOLOv8 Dataset Configuration for Traffic Light Detection
+
+# Dataset paths (relative to this file)
+path: ../data  # dataset root dir
+train: processed/train/images  # train images (relative to 'path')
+val: processed/val/images  # val images (relative to 'path')
+test: processed/test/images  # test images (optional)
+
+# Classes
+names:
+  0: red
+  1: yellow
+  2: green
+  3: off
+
+# Number of classes
+nc: 4
+
+# Download script/URL (optional)
+# download: https://github.com/ultralytics/yolov5/releases/download/v1.0/coco128.zip

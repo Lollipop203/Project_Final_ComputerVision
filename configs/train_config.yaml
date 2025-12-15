@@ -1,0 +1,63 @@
+# Training Configuration for Traffic Light Detection
+
+# Training hyperparameters
+training:
+  epochs: 20
+  batch_size: 16
+  image_size: 640
+  learning_rate: 0.01
+  optimizer: 'AdamW'  # SGD, Adam, AdamW
+  momentum: 0.937
+  weight_decay: 0.0005
+  warmup_epochs: 3
+  warmup_momentum: 0.8
+  warmup_bias_lr: 0.1
+  
+# Model settings
+model:
+  pretrained: 'yolov8n.pt'
+  freeze_layers: 0  # Number of layers to freeze, 0 = train all
+  dropout: 0.0
+
+# Data augmentation
+augmentation:
+  hsv_h: 0.015  # HSV-Hue augmentation
+  hsv_s: 0.7    # HSV-Saturation augmentation
+  hsv_v: 0.4    # HSV-Value augmentation
+  degrees: 0.0  # Rotation (+/- deg)
+  translate: 0.1  # Translation (+/- fraction)
+  scale: 0.5    # Scale (+/- gain)
+  shear: 0.0    # Shear (+/- deg)
+  perspective: 0.0  # Perspective (+/- fraction)
+  flipud: 0.0   # Vertical flip probability
+  fliplr: 0.5   # Horizontal flip probability
+  mosaic: 1.0   # Mosaic augmentation probability
+  mixup: 0.0    # Mixup augmentation probability
+  copy_paste: 0.0  # Segment copy-paste probability
+
+# Validation settings
+validation:
+  val_interval: 1  # Validate every N epochs
+  save_period: 10   # Save checkpoint every N epochs
+  patience: 50      # Early stopping patience
+
+# Loss weights
+loss:
+  box: 7.5
+  cls: 0.5
+  dfl: 1.5
+
+# Hardware settings
+device:
+  gpu_id: 0
+  workers: 8
+  amp: true  # Automatic Mixed Precision
+
+# Logging
+logging:
+  project: 'traffic_light_detection'
+  name: 'yolov8n_experiment'
+  save_dir: 'runs/train'
+  tensorboard: true
+  wandb: false
+  wandb_project: 'traffic-light-detection'
