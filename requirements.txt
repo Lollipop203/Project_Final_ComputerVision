@@ -1,11 +1,14 @@
 --extra-index-url https://download.pytorch.org/whl/cpu
 
-# Core dependencies optimized for Vercel
-torch>=2.0.0
-torchvision>=0.15.0
+# PyTorch CPU-only (nhẹ hơn nhiều)
+torch==2.1.0+cpu
+torchvision==0.16.0+cpu
+--find-links https://download.pytorch.org/whl/torch_stable.html
+
+# YOLOv8 và dependencies
 ultralytics
 opencv-python-headless
-numpy
+numpy<2.0.0
 pillow
 
 # API
@@ -14,5 +17,5 @@ uvicorn[standard]
 python-multipart
 python-dotenv
 pyyaml
-pydantic
+pydantic<2.0.0
 aiofiles

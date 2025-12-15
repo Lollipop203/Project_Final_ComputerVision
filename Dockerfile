@@ -2,14 +2,19 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Only glib is needed for opencv-headless (X11 libs not needed)
+# Install minimal system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libglib2.0-0 && \
-    rm -rf /var/lib/apt/lists/*
+    libglib2.0-0 \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
 
+# Copy requirements
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
 
+# Install Python packages với timeout cao hơn
+RUN pip install --no-cache-dir --timeout=1000 -r requirements.txt
+
+# Copy application code
 COPY . .
 
 EXPOSE 8000
