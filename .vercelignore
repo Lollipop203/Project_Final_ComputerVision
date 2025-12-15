@@ -1,0 +1,23 @@
+# Ignore large files and directories not needed for production
+data/
+logs/
+notebooks/
+runs/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.git/
+.github/
+.vscode/
+.idea/
+# Keep raw trained models but ignore work-in-progress checkpoints if any
+models/pretrained/
+models/trained/*
+!models/trained/epoch80.pt
+!models/trained/fulldata3.pt
+!models/trained/.gitkeep
