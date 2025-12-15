@@ -2,7 +2,7 @@
 
 model:
   architecture: yolov8n  # Options: yolov8n, yolov8s, yolov8m, yolov8l, yolov8x
-  trained_model: 'models/trained/epoch80_stripped.pt'  # Path to trained model
+  trained_model: 'models/trained/epoch80.pt'  # Path to trained model
   input_size: 640
   confidence_threshold: 0.5
   iou_threshold: 0.45
