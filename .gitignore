@@ -15,7 +15,7 @@ ENV/
 
 # PyTorch
 *.pth
-*.pt
+# *.pt
 !yolov8*.pt
 
 # Jupyter Notebook
