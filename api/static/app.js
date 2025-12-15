@@ -523,7 +523,7 @@ function updateFPS() {
 }
 
 // Results Display
-function displayResults(result, type) {
+function displayResults(response, type) { // renamed result to response for clarity
     const resultsArea = document.getElementById('results-area');
     const resultImage = document.getElementById('result-image');
     const resultVideo = document.getElementById('result-video');
@@ -533,20 +533,38 @@ function displayResults(result, type) {
     // Show results area
     resultsArea.style.display = 'block';
 
+    // Extract results object if nested (new API structure)
+    // New API: { success: true, results: { count, detections, output_image } }
+    // Old API (legacy support): { num_detections, detections, image_url }
+    const resultData = response.results || response;
+
     // Display image
-    if (type === 'image' && result.image_url) {
-        resultImage.src = API_BASE + result.image_url;
+    // New API uses output_image, Old uses image_url
+    const imgUrl = resultData.output_image || response.image_url;
+
+    if (type === 'image' && imgUrl) {
+        // Handle if URL is already absolute or relative
+        resultImage.src = imgUrl.startsWith('http') ? imgUrl : (API_BASE + imgUrl);
         resultImage.style.display = 'block';
         resultVideo.style.display = 'none';
+
+        // Add error handler for broken images
+        resultImage.onerror = function () {
+            this.style.display = 'none';
+            showStatus('Lỗi hiển thị ảnh kết quả', 'error');
+        };
     }
 
     // Update detection count
-    detectionCount.textContent = result.num_detections;
+    // New API uses count, Old uses num_detections
+    detectionCount.textContent = resultData.count !== undefined ? resultData.count : (resultData.num_detections || 0);
 
     // Display detections list
     detectionsList.innerHTML = '';
-    if (result.detections && result.detections.length > 0) {
-        result.detections.forEach((det, index) => {
+    const detections = resultData.detections || [];
+
+    if (detections.length > 0) {
+        detections.forEach((det, index) => {
             const item = document.createElement('div');
             item.className = 'detection-item';
             item.innerHTML = `
